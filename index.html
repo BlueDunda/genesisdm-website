@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GenesisDM: Fantasy Assistant — The Future of DM Screens</title>
 <meta name="description" content="GenesisDM: Fantasy Assistant is an official DM assistant for all experiences. It listens as you narrate and brings up matching scenes and music live, entirely on your own machine.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%231a1f27'/%3E%3Cpath d='M25.5 9.5c3.6 0 6.5 2.9 6.5 6.5 0 3-2 5.5-4.7 6.3.6-1 1-2.2 1-3.5 0-3.6-2.9-6.5-6.5-6.5-.7 0-1.4.1-2 .3 1.2-1.9 3.3-3.1 5.7-3.1z' fill='%23e0b862'/%3E%3Ccircle cx='21' cy='21' r='1.3' fill='%236fbba5'/%3E%3Ccircle cx='18.4' cy='24.6' r='1.05' fill='%236fbba5'/%3E%3Ccircle cx='16.6' cy='28.6' r='0.85' fill='%236fbba5'/%3E%3Cpath d='M24 30.5v9.3c-2.7-2-6.8-2.7-10-2.3V28c3.2-.5 7.3.2 10 2.5z' fill='%23f4f1ea' stroke='%23c99a3e' stroke-width='0.9' stroke-linejoin='round'/%3E%3Cpath d='M24 30.5v9.3c2.7-2 6.8-2.7 10-2.3V28c-3.2-.5-7.3.2-10 2.5z' fill='%23f4f1ea' stroke='%23c99a3e' stroke-width='0.9' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
   :root {
     --ink-950: #14181f;
@@ -118,18 +119,40 @@
   .transcript-line { font-size: 0.8rem; color: var(--text); opacity: 0.85; margin-bottom: 0.3rem; }
   .match-banner { display: flex; align-items: center; gap: 0.6rem; background: var(--ink-750); border: 1px solid var(--verdigris); border-radius: 6px; padding: 0.6rem; font-size: 0.78rem; }
   .conf-pill { background: var(--verdigris); color: #0d1512; font-weight: 700; border-radius: 999px; padding: 0.1rem 0.55rem; font-size: 0.7rem; }
-  .grid-map { display: grid; grid-template-columns: repeat(8, 1fr); gap: 2px; background: var(--ink-950); border: 1px solid var(--line); border-radius: 6px; padding: 6px; }
-  .grid-map div { aspect-ratio: 1; background: #2a3340; border-radius: 2px; }
-  .grid-map div.fog { background: #0e1117; }
-  .grid-map div.token { background: var(--brass); }
-  .grid-map div.token2 { background: var(--danger); }
+  .map-shot { position: relative; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); background: #000; line-height: 0; }
+  .map-shot img { display: block; width: 100%; height: auto; }
+  .map-fog { position: absolute; inset: 0; background: radial-gradient(ellipse at 32% 68%, transparent 30%, rgba(14,17,23,0.82) 68%); pointer-events: none; }
+  .map-token { position: absolute; width: 13px; height: 13px; border-radius: 50%; border: 2px solid #0d1512; box-shadow: 0 0 0 1px rgba(255,255,255,0.5); transform: translate(-50%, -50%); }
+  .map-token.brass { background: var(--brass); }
+  .map-token.danger { background: var(--danger); }
   .phone { width: 210px; margin: 0 auto; background: #0d1117; border: 6px solid var(--ink-800); border-radius: 28px; padding: 0.7rem; }
   .phone .screen { background: var(--ink-950); border-radius: 16px; padding: 0.7rem; }
-  .phone .scene-art { height: 90px; border-radius: 10px; background: linear-gradient(135deg, #1c3b34, #0d1512); display: flex; align-items: center; justify-content: center; color: var(--verdigris-strong); font-size: 0.7rem; margin-bottom: 0.5rem; }
+  .phone .scene-art {
+    height: 110px; border-radius: 10px; margin-bottom: 0.5rem;
+    background: linear-gradient(180deg, rgba(13,21,18,0) 45%, rgba(13,21,18,0.9) 100%), url('assets/img/scene-misty-forest-path.jpg') center/cover no-repeat;
+    display: flex; align-items: flex-end; padding: 0.45rem 0.55rem;
+    color: #fff; font-size: 0.7rem; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,0.85);
+  }
   .phone .clockbar { display: flex; gap: 4px; margin-bottom: 0.5rem; }
   .phone .clockbar div { flex: 1; height: 6px; border-radius: 3px; background: var(--ink-800); overflow: hidden; }
   .phone .clockbar div span { display: block; height: 100%; background: var(--brass); }
   .phone .now-playing { font-size: 0.68rem; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; }
+
+  /* Clocks */
+  .clock-row { display: flex; gap: 0.9rem; justify-content: space-around; flex-wrap: wrap; padding: 0.3rem 0 0.1rem; }
+  .clock-ring {
+    width: 64px; height: 64px; border-radius: 50%; position: relative;
+    background: conic-gradient(var(--brass) calc(var(--pct) * 1%), var(--ink-950) 0);
+  }
+  .clock-ring::before { content: ""; position: absolute; inset: 6px; border-radius: 50%; background: var(--ink-800); }
+  .clock-ring span { position: absolute; inset: 6px; z-index: 1; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.56rem; line-height: 1.15; color: var(--text); padding: 0 3px; }
+
+  /* Crafter */
+  .crafter-chip { background: var(--ink-950); border: 1px solid var(--line); border-radius: 8px; padding: 0.55rem 0.65rem; margin-bottom: 0.5rem; font-size: 0.8rem; color: var(--text); }
+  .crafter-tag { display: inline-block; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #0d1512; background: var(--verdigris-strong); border-radius: 4px; padding: 0.1rem 0.4rem; margin-right: 0.4rem; vertical-align: 1px; }
+  .crafter-tag.faction { background: var(--brass-strong); }
+  .crafter-actions { display: flex; gap: 0.5rem; }
+  .crafter-actions span { font-size: 0.72rem; padding: 0.3rem 0.7rem; background: var(--ink-800); }
 
   /* Features */
   .feature-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.75rem; margin-top: 2.5rem; }
@@ -189,7 +212,15 @@
 <header class="site">
   <div class="wrap nav-row">
     <a class="brand" href="#top">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2 21 7.5V16.5L12 22 3 16.5V7.5Z" stroke="#e0b862" stroke-width="1.6" fill="#1a1f27"/><path d="M12 2V22M3 7.5L12 12L21 7.5M3 16.5L12 12L21 16.5" stroke="#6fbba5" stroke-width="1"/></svg>
+      <svg width="30" height="30" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="22" fill="#1a1f27" stroke="#6fbba5" stroke-width="1.3"/>
+        <path d="M25.5 9.5c3.6 0 6.5 2.9 6.5 6.5 0 3-2 5.5-4.7 6.3.6-1 1-2.2 1-3.5 0-3.6-2.9-6.5-6.5-6.5-.7 0-1.4.1-2 .3 1.2-1.9 3.3-3.1 5.7-3.1z" fill="#e0b862"/>
+        <circle cx="21" cy="21" r="1.3" fill="#6fbba5"/>
+        <circle cx="18.4" cy="24.6" r="1.05" fill="#6fbba5"/>
+        <circle cx="16.6" cy="28.6" r="0.85" fill="#6fbba5"/>
+        <path d="M24 30.5v9.3c-2.7-2-6.8-2.7-10-2.3V28c3.2-.5 7.3.2 10 2.5z" fill="#f4f1ea" stroke="#c99a3e" stroke-width="0.9" stroke-linejoin="round"/>
+        <path d="M24 30.5v9.3c2.7-2 6.8-2.7 10-2.3V28c-3.2-.5-7.3.2-10 2.5z" fill="#f4f1ea" stroke="#c99a3e" stroke-width="0.9" stroke-linejoin="round"/>
+      </svg>
       <span class="brand-text"><span class="name">GenesisDM</span><span class="tagline">Fantasy Assistant</span></span>
     </a>
     <nav class="links">
@@ -285,11 +316,11 @@
         </div>
         <div class="panel">
           <div class="panel-title">Tactical Map</div>
-          <div class="grid-map">
-            <div></div><div></div><div class="fog"></div><div class="fog"></div><div></div><div></div><div></div><div></div>
-            <div></div><div class="token"></div><div class="fog"></div><div class="fog"></div><div></div><div></div><div></div><div></div>
-            <div></div><div></div><div></div><div class="fog"></div><div class="token2"></div><div></div><div></div><div></div>
-            <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+          <div class="map-shot">
+            <img src="assets/img/tactical-map-manor-hall.png" alt="Top-down tactical map of a manor great hall" loading="lazy">
+            <div class="map-fog"></div>
+            <div class="map-token brass" style="left:41%; top:46%;"></div>
+            <div class="map-token danger" style="left:58%; top:60%;"></div>
           </div>
         </div>
       </div>
@@ -307,8 +338,48 @@
       </div>
       <div class="mock-caption"><strong>Player Companion</strong> — the players' own live view: scene, clocks, and map, synced to a phone in real time.</div>
     </div>
+    <div class="mock-card">
+      <div class="mock-frame">
+        <div class="tabbar">
+          <span class="tabchip">Narrative</span>
+          <span class="tabchip">Combat &amp; Map</span>
+          <span class="tabchip active">Clocks</span>
+          <span class="tabchip">Crafter</span>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Segmented Clocks</div>
+          <div class="clock-row">
+            <div class="clock-ring" style="--pct:75"><span>Storm Breaks</span></div>
+            <div class="clock-ring" style="--pct:40"><span>Guards Alerted</span></div>
+            <div class="clock-ring" style="--pct:100"><span>Ritual Complete</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-caption"><strong>Clocks Tab</strong> — Blades-in-the-Dark-style segmented trackers for tension, countdowns, and long-term threats.</div>
+    </div>
+    <div class="mock-card">
+      <div class="mock-frame">
+        <div class="tabbar">
+          <span class="tabchip">Narrative</span>
+          <span class="tabchip">Combat &amp; Map</span>
+          <span class="tabchip">Clocks</span>
+          <span class="tabchip active">Crafter</span>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Extraction Queue</div>
+          <div class="crafter-chip"><span class="crafter-tag">NPC</span>Varyn Ashcombe — a smuggler with a debt to the wrong family</div>
+          <div class="crafter-chip"><span class="crafter-tag faction">Faction</span>The Ashen Concord — mercenaries hired to guard the pass</div>
+        </div>
+        <div class="crafter-actions">
+          <span class="btn-ghost btn-sm">Confirm</span>
+          <span class="btn-ghost btn-sm">Edit</span>
+          <span class="btn-ghost btn-sm">Discard</span>
+        </div>
+      </div>
+      <div class="mock-caption"><strong>Campaign Crafter</strong> <span class="wip-badge" style="margin:0 0 0 0.3rem; vertical-align:2px;">WIP</span> — nothing lands until you confirm, edit, or discard it.</div>
+    </div>
   </div>
-  <p class="mock-note">These are illustrative mockups of the trial build's real theme, not literal screen captures.</p>
+  <p class="mock-note">UI chrome is illustrative, built from the trial build's real theme — not literal screen captures. The forest scene shown is real starter-pack art bundled with the app (Pexels license, Francesco Ungaro). The tactical map is real CC0 art (Kenney, kenney.nl) shown for illustration — not yet part of the starter pack.</p>
 </section>
 
 <section id="features" class="wrap">
