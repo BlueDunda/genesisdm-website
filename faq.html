@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — GenesisDM: Fantasy Assistant</title>
+<meta name="description" content="Honest, realistic expectations for GenesisDM: Fantasy Assistant's Wave 1 trial build: system requirements, trial length, privacy, and known limitations.">
+<style>
+  :root {
+    --ink-950: #14181f;
+    --ink-900: #1a1f27;
+    --ink-800: #212832;
+    --line: #3a4450;
+    --text: #dfe6e2;
+    --muted: #8b9a94;
+    --verdigris: #4f9686;
+    --verdigris-strong: #6fbba5;
+    --brass: #c99a3e;
+    --brass-strong: #e0b862;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ink-950);
+    color: var(--text);
+    font-family: "Segoe UI", "Segoe UI Variable", system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+  }
+  a { color: var(--verdigris-strong); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+  h1, h2 { font-family: Georgia, "Times New Roman", serif; }
+  header.site {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(20, 24, 31, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.9rem 1.5rem; max-width: 860px; margin: 0 auto; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 0.6rem; font-family: Georgia, serif; color: var(--text); text-decoration: none; }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+  .brand-text .name { font-size: 1.15rem; font-weight: 700; }
+  .brand-text .tagline { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brass-strong); font-weight: 600; }
+  .btn { display: inline-block; text-decoration: none; font-weight: 600; padding: 0.6rem 1.3rem; border-radius: 999px; font-size: 0.9rem; }
+  .btn-primary { background: var(--verdigris); color: #0d1512; }
+  .btn-primary:hover { background: var(--verdigris-strong); }
+  .hero { padding: 3.5rem 0 2rem; }
+  .eyebrow { text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.75rem; color: var(--brass-strong); font-weight: 600; }
+  h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.5em 0 0.4em; }
+  .lede { color: var(--muted); max-width: 62ch; }
+  .honesty-note {
+    background: var(--ink-900); border: 1px solid var(--brass); border-radius: var(--radius);
+    padding: 1.1rem 1.4rem; margin: 1.5rem 0 3rem; font-size: 0.92rem; color: var(--text);
+  }
+  .honesty-note strong { color: var(--brass-strong); }
+  .faq-section { margin-bottom: 2.5rem; }
+  .faq-section h2 { font-size: 1.15rem; color: var(--verdigris-strong); border-bottom: 1px solid var(--line); padding-bottom: 0.5rem; margin-bottom: 1rem; }
+  details {
+    background: var(--ink-900); border: 1px solid var(--line); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  details[open] { border-color: var(--verdigris); }
+  summary {
+    cursor: pointer; font-weight: 600; font-size: 0.98rem; color: var(--text);
+    list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--brass-strong); font-size: 1.2rem; flex: none; }
+  details[open] summary::after { content: "–"; }
+  .answer { margin-top: 0.7rem; color: var(--muted); font-size: 0.92rem; }
+  .answer ul { padding-left: 1.2rem; }
+  .answer li { margin-bottom: 0.4rem; }
+  table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.88rem; }
+  table th, table td { text-align: left; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--line); }
+  table th { color: var(--muted); font-weight: 600; }
+  .spec-wrap { overflow-x: auto; }
+  .badge-inline { display: inline-block; background: var(--ink-800); border: 1px solid var(--line); border-radius: 6px; padding: 0.1rem 0.5rem; font-size: 0.78rem; color: var(--muted); }
+  footer { border-top: 1px solid var(--line); padding: 2.5rem 1.5rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-row">
+    <a class="brand" href="index.html">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2 21 7.5V16.5L12 22 3 16.5V7.5Z" stroke="#e0b862" stroke-width="1.6" fill="#1a1f27"/><path d="M12 2V22M3 7.5L12 12L21 7.5M3 16.5L12 12L21 16.5" stroke="#6fbba5" stroke-width="1"/></svg>
+      <span class="brand-text"><span class="name">GenesisDM</span><span class="tagline">Fantasy Assistant</span></span>
+    </a>
+    <a class="btn btn-primary" href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download Trial</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Read Before You Install</div>
+    <h1>Frequently Asked Questions</h1>
+    <p class="lede"><strong>GenesisDM: Fantasy Assistant</strong> — an official DM assistant for all experiences — is an early Wave 1 trial build. Here's exactly what to expect — no exaggeration, no marketing gloss.</p>
+  </div>
+
+  <div class="honesty-note">
+    <strong>The short version:</strong> this is a real, working local-first AI DM tool with genuine session-changing features — and it's still an early trial. Some things (custom asset uploads, full multi-phone voice, Campaign Crafter's final shape) are still being built. Read on for specifics.
+  </div>
+
+  <div class="faq-section">
+    <h2>Getting Started</h2>
+
+    <details>
+      <summary>What do I need to run it?</summary>
+      <div class="answer">
+        <div class="spec-wrap">
+          <table>
+            <tr><th>OS</th><td>Windows 10 or 11 only — this build is Windows-only for now</td></tr>
+            <tr><th>RAM</th><td>8 GB minimum, 16 GB recommended (the local LLM and speech models both need headroom)</td></tr>
+            <tr><th>Disk space</th><td>~6 GB free (the app itself is ~1.5–3 GB, plus first-run model downloads)</td></tr>
+            <tr><th>GPU</th><td>Not required — everything runs on CPU by default</td></tr>
+            <tr><th>Microphone</th><td>Optional — only needed for live voice transcription; text-only play works fine without one</td></tr>
+          </table>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Do I need an internet connection?</summary>
+      <div class="answer">
+        <p>Only for first launch. A guided setup wizard downloads a local LLM model (via Ollama), a local speech-to-text model (Whisper), and two small embedding models — typically 10–20 minutes depending on your connection. Every step is skippable and resumable if something stalls. After that first setup finishes, <strong>GenesisDM runs entirely offline.</strong></p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Is this free? Are there any API costs?</summary>
+      <div class="answer">
+        <p>Free, with no ongoing costs. Speech transcription and scene/entity extraction both run on a local LLM (via Ollama) and local Whisper transcription on your own machine — there's no cloud API being billed, no subscription, no hidden usage costs.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>How long is the trial, and what happens when it ends?</summary>
+      <div class="answer">
+        <p>Wave 1 is a <strong>30-day trial</strong> from your first launch. You'll see a "Trial: N days left" label the whole time, a one-time heads-up at 3 days remaining, and a lock screen once it expires. This is a soft, local-only check — not DRM — and your saved data isn't deleted when the trial ends.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="faq-section">
+    <h2>Privacy &amp; Multiplayer</h2>
+
+    <details>
+      <summary>Does my voice or data ever leave my computer?</summary>
+      <div class="answer">
+        <p>No. Voice transcription (Whisper) and scene/entity extraction (a local LLM via Ollama) both run entirely on your own machine — nothing is sent to a cloud speech or LLM API. The only network-facing piece is the optional Room Service that lets players join from their phones, and that's bound to your own local network by default. Reaching it from outside your network requires a WireGuard tunnel you set up and control yourself.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What does a player need to join as a Player Companion?</summary>
+      <div class="answer">
+        <p>Just a phone with a browser on the same wifi as your PC, plus your room code (or a quick scan of your in-app QR code) and a typed display name — no account, no install. Players joining from outside your home network need a WireGuard connection profile you send them first; that remote path is newer and less tested than the local, same-wifi flow.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="faq-section">
+    <h2>Features &amp; Limitations</h2>
+
+    <details>
+      <summary>Is Campaign Crafter ready to use?</summary>
+      <div class="answer">
+        <p>It's real and working today — voice-driven entity extraction, a living storyboard with auto-drawn relationships, Scenes &amp; Threads, and one-click run-sheet export all function. But it's the newest part of GenesisDM and still finding its final shape. Treat it as an early look rather than a finished feature, and expect rough edges.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What's not working yet, or has known limitations?</summary>
+      <div class="answer">
+        <ul>
+          <li><strong>Custom asset uploads</strong> (your own art or music) aren't supported in this build yet — the tagging tool isn't packaged in. GenesisDM ships with a small starter pack so scene/music matching works immediately without one.</li>
+          <li><strong>Notion note-sync</strong> is planned but not built. Obsidian vault connection is supported today via the in-app Settings dialog.</li>
+          <li><strong>Full multi-phone voice</strong> (each player's own phone mic captured with pinpoint speaker attribution) is still waiting on one remaining manual step — a TLS certificate for secure browser microphone access. It works today on a single machine; broader multi-device testing is still in progress.</li>
+          <li><strong>Windows SmartScreen</strong> will likely show "Windows protected your PC" on first run, since this build isn't code-signed yet. This is expected — click "More info" → "Run anyway."</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>What tabletop systems does it support?</summary>
+      <div class="answer">
+        <p>D&amp;D 5e (2024), Daggerheart, and a system-agnostic "Generic" mode — one dropdown switches Combat, Map, and Mechanics tracking to match whichever you're running.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="faq-section">
+    <h2>Feedback</h2>
+
+    <details>
+      <summary>How do I give feedback or report a bug?</summary>
+      <div class="answer">
+        <p>The app has an in-app <strong>Send Feedback</strong> button (always available, not just at trial's end) that opens a short pre-filled form. There's also a <strong>Copy Diagnostic Summary</strong> button that copies a plain-text summary of your most recent session to your clipboard, so you can paste it into the form yourself — no raw logs or file uploads required. There's no separate public bug tracker for this wave; the feedback form is where reports go.</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html">← Back to GenesisDM</a> &nbsp;·&nbsp;
+  <a href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download the Trial</a>
+</footer>
+
+</body>
+</html>
