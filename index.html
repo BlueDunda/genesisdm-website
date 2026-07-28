@@ -245,7 +245,7 @@
   </div>
   <div class="badge-row">
     <span class="badge">Windows 10 / 11</span>
-    <span class="badge">v0.1.1</span>
+    <span class="badge">v0.1.2</span>
     <span class="badge">30-Day Free Trial</span>
     <span class="badge">Runs 100% Locally</span>
   </div>
@@ -289,7 +289,9 @@
         <div class="tabbar">
           <span class="tabchip active">Narrative</span>
           <span class="tabchip">Combat &amp; Map</span>
+          <span class="tabchip">Mechanics</span>
           <span class="tabchip">Clocks</span>
+          <span class="tabchip">Notes</span>
           <span class="tabchip">Crafter</span>
         </div>
         <div class="panel">
@@ -311,7 +313,9 @@
         <div class="tabbar">
           <span class="tabchip">Narrative</span>
           <span class="tabchip active">Combat &amp; Map</span>
+          <span class="tabchip">Mechanics</span>
           <span class="tabchip">Clocks</span>
+          <span class="tabchip">Notes</span>
           <span class="tabchip">Crafter</span>
         </div>
         <div class="panel">
@@ -343,7 +347,9 @@
         <div class="tabbar">
           <span class="tabchip">Narrative</span>
           <span class="tabchip">Combat &amp; Map</span>
+          <span class="tabchip">Mechanics</span>
           <span class="tabchip active">Clocks</span>
+          <span class="tabchip">Notes</span>
           <span class="tabchip">Crafter</span>
         </div>
         <div class="panel">
@@ -362,7 +368,29 @@
         <div class="tabbar">
           <span class="tabchip">Narrative</span>
           <span class="tabchip">Combat &amp; Map</span>
+          <span class="tabchip">Mechanics</span>
           <span class="tabchip">Clocks</span>
+          <span class="tabchip active">Notes</span>
+          <span class="tabchip">Crafter</span>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Your Obsidian Vault</div>
+          <div class="transcript-line">Search: "ashen concord" — 3 notes found</div>
+          <div class="match-banner">
+            <span>[[Varyn Ashcombe]] · linked from 2 other notes</span>
+          </div>
+        </div>
+      </div>
+      <div class="mock-caption"><strong>Notes Tab</strong> — search &amp; browse your connected Obsidian vault, click through wikilinks, log the session as you play.</div>
+    </div>
+    <div class="mock-card">
+      <div class="mock-frame">
+        <div class="tabbar">
+          <span class="tabchip">Narrative</span>
+          <span class="tabchip">Combat &amp; Map</span>
+          <span class="tabchip">Mechanics</span>
+          <span class="tabchip">Clocks</span>
+          <span class="tabchip">Notes</span>
           <span class="tabchip active">Crafter</span>
         </div>
         <div class="panel">
@@ -406,6 +434,7 @@
         <li>Map: drag/pan/zoom, markup &amp; walls, Fog of War, Measure Distance, Check Cover, experimental Dynamic Lighting</li>
         <li>Clocks: Blades-in-the-Dark-style segmented trackers</li>
         <li>Mechanics: freeform house-rules tracker per system</li>
+        <li>Notes: search &amp; browse your connected Obsidian vault, with wikilinks and a manual session log, right inside the app</li>
         <li>One System dropdown (D&amp;D 5e 2024 / Daggerheart / Generic) drives Combat, Map &amp; Mechanics together</li>
         <li>Global Undo, colorblind-safe palette, adjustable text size</li>
       </ul>
@@ -419,7 +448,7 @@
         <li>Pre-session lobby with a waiting-room roster before the main panel opens</li>
         <li>Player-uploaded avatars shown as their own map token</li>
         <li>Per-player fog overrides — let a scout see ahead of the party</li>
-        <li>WireGuard tunnel support for players joining remotely, off your LAN</li>
+        <li>Remote players off your LAN: a one-click Cloudflare Tunnel (recommended, no router setup), or self-hosted WireGuard for full control</li>
       </ul>
     </div>
     <div class="feature-group">
@@ -478,7 +507,7 @@
       <div class="qr-caption">projectgenesisdm.com</div>
     </div>
     <div class="invite-copy">
-      <textarea id="inviteText" readonly>Hey — I'm testing GenesisDM, an AI-powered DM screen that reacts to my voice live at the table. Come try the free trial: https://projectgenesisdm.com</textarea>
+      <textarea id="inviteText" readonly>Hey — I'm testing GenesisDM, a local AI DM screen that reacts to my voice live at the table. Come try the free trial: https://projectgenesisdm.com</textarea>
       <div class="invite-actions">
         <button class="btn btn-primary btn-sm" onclick="copyInvite(this)" type="button">Copy Invite Message</button>
         <span class="copy-status" id="copyStatus"></span>
