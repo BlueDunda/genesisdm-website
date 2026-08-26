@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's New — GenesisDM: Fantasy Assistant</title>
+<meta name="description" content="What changed between GenesisDM v0.1.2 and v0.1.3 — dice roller, player Kick/Remove, D&D Beyond sheet import, Crafter vault export, trial rework, and more.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%231a1f27'/%3E%3Cpath d='M25.5 9.5c3.6 0 6.5 2.9 6.5 6.5 0 3-2 5.5-4.7 6.3.6-1 1-2.2 1-3.5 0-3.6-2.9-6.5-6.5-6.5-.7 0-1.4.1-2 .3 1.2-1.9 3.3-3.1 5.7-3.1z' fill='%23e0b862'/%3E%3Ccircle cx='21' cy='21' r='1.3' fill='%236fbba5'/%3E%3Ccircle cx='18.4' cy='24.6' r='1.05' fill='%236fbba5'/%3E%3Ccircle cx='16.6' cy='28.6' r='0.85' fill='%236fbba5'/%3E%3Cpath d='M24 30.5v9.3c-2.7-2-6.8-2.7-10-2.3V28c3.2-.5 7.3.2 10 2.5z' fill='%23f4f1ea' stroke='%23c99a3e' stroke-width='0.9' stroke-linejoin='round'/%3E%3Cpath d='M24 30.5v9.3c2.7-2 6.8-2.7 10-2.3V28c-3.2-.5-7.3.2-10 2.5z' fill='%23f4f1ea' stroke='%23c99a3e' stroke-width='0.9' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --ink-950: #14181f;
+    --ink-900: #1a1f27;
+    --ink-800: #212832;
+    --ink-750: #262e3a;
+    --line: #3a4450;
+    --text: #dfe6e2;
+    --muted: #8b9a94;
+    --verdigris: #4f9686;
+    --verdigris-strong: #6fbba5;
+    --verdigris-bg: rgba(79,150,134,0.08);
+    --brass: #c99a3e;
+    --brass-strong: #e0b862;
+    --danger: #c0453f;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ink-950);
+    color: var(--text);
+    font-family: "Segoe UI", "Segoe UI Variable", system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+  }
+  a { color: var(--verdigris-strong); text-decoration: none; }
+  a:hover { color: var(--verdigris-strong); text-decoration: underline; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+  h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; }
+  header.site {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(20, 24, 31, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.9rem 1.5rem; max-width: 860px; margin: 0 auto; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 0.6rem; font-family: Georgia, serif; color: var(--text); text-decoration: none; }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+  .brand-text .name { font-size: 1.15rem; font-weight: 700; }
+  .brand-text .tagline { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brass-strong); font-weight: 600; }
+  nav.links { display: flex; gap: 1.4rem; flex-wrap: wrap; font-size: 0.92rem; }
+  nav.links a { color: var(--text); text-decoration: none; opacity: 0.75; }
+  nav.links a:hover { opacity: 1; color: var(--verdigris-strong); }
+  nav.links a.active { color: var(--verdigris-strong); opacity: 1; }
+
+  .btn { display: inline-block; text-decoration: none; font-weight: 600; padding: 0.6rem 1.3rem; border-radius: 999px; font-size: 0.9rem; }
+  .btn-primary { background: var(--verdigris); color: #0d1512; }
+  .btn-primary:hover { background: var(--verdigris-strong); }
+  .btn-sm { padding: 0.5rem 1rem; font-size: 0.85rem; }
+
+  .hero { padding: 3.5rem 0 1.5rem; }
+  .eyebrow { text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.75rem; color: var(--brass-strong); font-weight: 600; }
+  h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.5em 0 0.4em; }
+  .lede { color: var(--muted); max-width: 62ch; font-size: 1.05rem; }
+
+  .version-header {
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--verdigris-bg);
+    border: 1px solid var(--verdigris);
+    border-radius: var(--radius);
+    padding: 1.5rem 2rem;
+    margin: 0 0 1.5rem;
+  }
+  .version-header .tag {
+    font-size: 2.2rem; font-weight: 700; color: var(--verdigris-strong);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .version-header .tag small {
+    font-size: 0.9rem; font-family: "Segoe UI", system-ui, sans-serif;
+    display: block; color: var(--muted); font-weight: 400;
+  }
+
+  .note {
+    background: var(--ink-900); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 1rem 1.4rem;
+    color: var(--muted); font-size: 0.92rem; margin-bottom: 2rem;
+  }
+
+  .changeset { margin-bottom: 2.5rem; }
+  .changeset h2 {
+    font-size: 1.25rem; color: var(--verdigris-strong);
+    border-bottom: 1px solid var(--line); padding-bottom: 0.5rem; margin-bottom: 0.8rem;
+  }
+  .changeset h2 .badge {
+    display: inline-block; font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+    background: var(--brass); color: #241c08;
+    border-radius: 6px; padding: 0.15rem 0.5rem;
+    margin-left: 0.6rem; vertical-align: middle;
+    letter-spacing: 0.04em;
+  }
+  .changeset h3 {
+    font-size: 1rem; color: var(--text);
+    margin: 1em 0 0.4em;
+  }
+  .changeset ul {
+    margin: 0.3em 0 0.6em; padding-left: 1.2rem;
+  }
+  .changeset li {
+    font-size: 0.93rem; color: var(--text); margin-bottom: 0.55rem;
+  }
+  .changeset li::marker { color: var(--brass-strong); }
+  .changeset li .sub {
+    display: block; font-size: 0.82rem; color: var(--muted); margin-top: 0.1rem;
+  }
+  .changeset .tag-dot {
+    display: inline-block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+    background: var(--ink-800); color: var(--muted); border-radius: 4px;
+    padding: 0.1rem 0.45rem; margin-right: 0.3rem; letter-spacing: 0.03em;
+    vertical-align: 1px;
+  }
+  .changeset .tag-dot.new { background: var(--verdigris); color: #0d1512; }
+  .changeset .tag-dot.fix { background: var(--danger); color: #f4e2e0; }
+  .changeset .tag-dot.security { background: var(--brass); color: #241c08; }
+
+  footer { border-top: 1px solid var(--line); padding: 2.5rem 1.5rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--verdigris-strong); }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-row">
+    <a class="brand" href="index.html">
+      <svg width="28" height="28" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="22" fill="#1a1f27" stroke="#6fbba5" stroke-width="1.3"/>
+        <path d="M25.5 9.5c3.6 0 6.5 2.9 6.5 6.5 0 3-2 5.5-4.7 6.3.6-1 1-2.2 1-3.5 0-3.6-2.9-6.5-6.5-6.5-.7 0-1.4.1-2 .3 1.2-1.9 3.3-3.1 5.7-3.1z" fill="#e0b862"/>
+        <circle cx="21" cy="21" r="1.3" fill="#6fbba5"/>
+        <circle cx="18.4" cy="24.6" r="1.05" fill="#6fbba5"/>
+        <circle cx="16.6" cy="28.6" r="0.85" fill="#6fbba5"/>
+        <path d="M24 30.5v9.3c-2.7-2-6.8-2.7-10-2.3V28c3.2-.5 7.3.2 10 2.5z" fill="#f4f1ea" stroke="#c99a3e" stroke-width="0.9" stroke-linejoin="round"/>
+        <path d="M24 30.5v9.3c2.7-2 6.8-2.7 10-2.3V28c-3.2-.5-7.3.2-10 2.5z" fill="#f4f1ea" stroke="#c99a3e" stroke-width="0.9" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand-text"><span class="name">GenesisDM</span><span class="tagline">Fantasy Assistant</span></span>
+    </a>
+    <nav class="links">
+      <a href="index.html">Home</a>
+      <a class="active" href="whatsnew.html">What's New</a>
+      <a href="faq.html">FAQ</a>
+    </nav>
+    <a class="btn btn-primary btn-sm" href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download Trial</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">v0.1.3 Release Notes</div>
+    <h1>What's New in GenesisDM</h1>
+    <p class="lede">This is a big one — a full month of builds between v0.1.2 (July 28) and v0.1.3 (August 24). Here's every change worth knowing about, grouped by what it affects at your table.</p>
+  </div>
+
+  <div class="version-header">
+    <div class="tag">v0.1.3 <small>— August 24, 2026</small></div>
+    <span class="btn btn-sm btn-primary" style="flex:none; margin-left:auto; font-size:0.8rem;">~683 MB download</span>
+  </div>
+
+  <div class="note">
+    <strong>About this build:</strong> v0.1.3 is a Wave 1 trial release. Everything here runs locally on your machine — no cloud API, no subscription, no data leaving your PC. <a href="faq.html">See the FAQ</a> for system requirements and trial details.
+  </div>
+
+  <div class="changeset">
+    <h2>Built-in Dice Roller <span class="badge">New</span></h2>
+    <p style="color:var(--muted); font-size:0.92rem; margin:0 0 0.5em;">The feature testers asked for most — a proper dice roller right in the top bar.</p>
+    <ul>
+      <li>A <strong>Roll Dice</strong> button in the top bar opens the DiceRollerDialog — click it once, roll from there</li>
+      <li>Pure NdM+/-K expressions: <code style="background:var(--ink-800);padding:0 6px;border-radius:4px;font-size:0.85rem;">2d20+5</code>, <code style="background:var(--ink-800);padding:0 6px;border-radius:4px;font-size:0.85rem;">3d6-2</code>, <code style="background:var(--ink-800);padding:0 6px;border-radius:4px;font-size:0.85rem;">d20</code>, bare <code style="background:var(--ink-800);padding:0 6px;border-radius:4px;font-size:0.85rem;">dM</code> for matching quick-roll button labels</li>
+      <li>Keeps a running history so you can see the last few results without re-rolling</li>
+    </ul>
+  </div>
+
+  <div class="changeset">
+    <h2>Player Management: Kick &amp; Remove <span class="badge">New</span></h2>
+    <p style="color:var(--muted); font-size:0.92rem; margin:0 0 0.5em;">DM-side control over who's actually at the table — and who isn't.</p>
+    <ul>
+      <li><strong>Kick</strong> and <strong>Remove</strong> buttons in the player roster — Kick disconnects them, Remove also wipes their saved profile from the campaign</li>
+      <li>The roster now shows which players are <strong>connected right now</strong> vs merely known (previously joined)</li>
+      <li>A removed/kicked player can't be resurrected through other DM-gated routes — the action is final</li>
+      <li>When a remote player disconnects, their map token <strong>dims</strong> so you can tell at a glance who's still at the table</li>
+      <li>Players get a clear <strong>"The DM has removed you from the game"</strong> message if they're kicked</li>
+      <li><strong>Room capacity lowered to 8</strong> for reliability (was unlimited, now matches realistic table size)</li>
+    </ul>
+  </div>
+
+  <div class="changeset">
+    <h2>Character Sheets: D&D Beyond Import <span class="badge">New</span></h2>
+    <p style="color:var(--muted); font-size:0.92rem; margin:0 0 0.5em;">Beyond PDF import, better player-facing visibility, and drag-to-reorder.</p>
+    <ul>
+      <li>Import a character from <strong>D&D Beyond</strong> (downloaded PDF) alongside the original PDF import — more ways to bring a sheet in</li>
+      <li><strong>Ask for Sheet</strong> button in the Players dialog — one click to request a character from any connected player</li>
+      <li>Player names now show their <strong>character name, companion status, and level</strong> right in the roster</li>
+      <li>Character entries are <strong>collapsible and searchable</strong>, with highlight on match</li>
+      <li>Drag rows to <strong>reorder</strong> your sheet list</li>
+      <li><strong>Delete</strong> a character's whole profile when you no longer need it</li>
+    </ul>
+  </div>
+
+  <div class="changeset">
+    <h2>Campaign Crafter → Obsidian Export <span class="badge">New</span></h2>
+    <p style="color:var(--muted); font-size:0.92rem; margin:0 0 0.5em;">What the Crafter builds now comes back to you as real notes, not just an in-app view.</p>
+    <ul>
+      <li>Export confirmed Crafter entities (NPCs, factions, locations) <strong>directly into your connected Obsidian vault</strong></li>
+      <li>Export a <strong>Run Sheet</strong> — your session plan — as an Obsidian note too</li>
+      <li><strong>Preserves DM-added content</strong> across re-exports — edit the notes the Crafter wrote and keep your changes when you export again</li>
+    </ul>
+  </div>
+
+  <div class="changeset">
+    <h2>Trial System: Per-Install Clock <span class="badge">New</span></h2>
+    <p style="color:var(--muted); font-size:0.92rem; margin:0 0 0.5em;">The trial now counts time from <em>your</em> install, not the build date — a real usability fix.</p>
+    <ul>
+      <li>The 30-day trial clock now starts on <strong>first launch per install</strong>, replacing the old universal build-embedded expiry</li>
+      <li>Cleaner messaging: you see "Trial: N days left" the whole time, with a one-time heads-up at 3 days</li>
+      <li>The lock screen at expiry is still soft and local — your saved data stays untouched</li>
+    </ul>
+  </div>
+
+  <div class="changeset">
+    <h2>UI &amp; Layout Polish <span class="tag-dot fix">Fix</span></h2>
+    <ul>
+      <li>Fixed the top bar <strong>overflow bug</strong> — long command names or narrow windows no longer clip controls off-screen (QScrollArea) <span class="sub">Affected every tab; was the most-cited layout grievance.</span></li>
+      <li>Fixed the <strong>crypto.randomUUID crash</strong> in the webclient that could prevent the Player Companion from loading on some browser configurations</li>
+      <li><strong>Multiplayer bar cleanup</strong>: merged the "Show QR" button into the Players button, removed redundant join-URL text that was clutter once you already knew how to connect</li>
+    </ul>
+  </div>
+
+  <div class="changeset">
+    <h2>Configuration &amp; Quality of Life <span class="tag-dot new">Improvement</span></h2>
+    <ul>
+      <li><strong>Assets-only location override</strong>: you can now store your art and music in a different folder than the rest of the app data — useful if your assets live on a separate drive from your models/logs</li>
+      <li><strong>Crafter first-click tutorial</strong>: if you open the Crafter tab without having used it before, a one-time pointer explains what it does</li>
+      <li><strong>Settings dialog grouped</strong> with QGroupBox — easier to scan than the old flat list</li>
+      <li>Empty-state guidance on blank panels — tells you what a tab is for before you've filled it</li>
+    </ul>
+  </div>
+
+  <div class="changeset">
+    <h2>Security &amp; Dependencies <span class="tag-dot security">Security</span></h2>
+    <ul>
+      <li>Fixed a <strong>player-impersonation gap</strong> in avatar uploads that could let one player claim another's token</li>
+      <li><strong>WireGuard script-breakout</strong> prevention: ntfy_topic and peer_name inputs are now properly sanitized</li>
+      <li>Bumped <strong>aiohttp, cryptography, pypdf, chromadb, setuptools, torch</strong> per ongoing security review — no known vulnerabilities in previous versions, but we're staying current with best practices</li>
+    </ul>
+  </div>
+
+  <div class="changeset">
+    <h2>What Still Needs Work</h2>
+    <p style="color:var(--muted); font-size:0.92rem;">The FAQ covers the full list, but to call out what's most relevant to this build:</p>
+    <ul>
+      <li><strong>Custom asset uploads</strong> (your own art / music) aren't packaged yet — the tagging tool isn't in. The starter pack covers matching on first launch without one.</li>
+      <li><strong>Full multi-phone voice</strong> (each player's own phone mic) is still blocked on one manual step — a TLS cert for secure browser mic access. Single-mic DM voice works today.</li>
+      <li><strong>Notion note-sync</strong> is planned but not started. Obsidian vault connection works today.</li>
+      <li>Campaign Crafter is still finding its final shape — testers see it early, rough edges and all. Export is now working, but the UI is still evolving.</li>
+    </ul>
+  </div>
+
+  <div style="text-align:center; border-top: 1px solid var(--line); padding-top: 2.5rem; margin-top: 1.5rem;">
+    <a class="btn btn-primary" href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download v0.1.3</a>
+    <br>
+    <span style="color:var(--muted); font-size:0.85rem; display:inline-block; margin-top:0.6rem;">Windows 10 / 11 · ~683 MB download · 30-day trial · <a href="faq.html" style="color:inherit;text-decoration:underline;">Read the FAQ first →</a></span>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html">← Back to GenesisDM</a> &nbsp;·&nbsp;
+  <a href="faq.html">FAQ</a> &nbsp;·&nbsp;
+  <a href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download the Trial</a>
+</footer>
+
+</body>
+</html>
