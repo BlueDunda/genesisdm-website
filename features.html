@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Features &amp; How It Works | GenesisDM</title>
+<meta name="description" content="A practical tour of GenesisDM's local-first DM tools, voice-driven scene matching, combat/map workspace, campaign tools, player companion, and current limitations.">
+<style>
+:root{--bg:#14181f;--panel:#1a1f27;--line:#3a4450;--text:#dfe6e2;--muted:#aebbb6;--green:#6fbba5;--gold:#e0b862;--radius:14px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 "Segoe UI",system-ui,sans-serif}a{color:var(--green)}.wrap{max-width:960px;margin:auto;padding:0 1.4rem}header{position:sticky;top:0;background:#14181ff2;border-bottom:1px solid var(--line);backdrop-filter:blur(6px);z-index:2}.nav{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}.brand{color:var(--text);font-weight:700;text-decoration:none;font-family:Georgia,serif;font-size:1.2rem}.links{display:flex;gap:1rem;flex-wrap:wrap}.links a{color:var(--text);text-decoration:none}.hero{padding:3.5rem 0 2rem}.eyebrow{color:var(--gold);letter-spacing:.15em;text-transform:uppercase;font-size:.78rem;font-weight:700}h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.2}h1{font-size:clamp(2rem,5vw,3.3rem);margin:.5rem 0}h2{margin-top:2.5rem}h3{color:var(--green)}.lede{color:var(--muted);font-size:1.08rem;max-width:72ch}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.4rem;margin:1rem 0}.card li{margin:.5rem 0}.badge{display:inline-block;padding:.15rem .55rem;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.85rem}footer{border-top:1px solid var(--line);margin-top:3rem;padding:2rem 0;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><a class="brand" href="index.html">GenesisDM</a><nav class="links" aria-label="Main navigation"><a href="index.html">Home</a><a href="features.html" aria-current="page">Features</a><a href="integrations.html">Integrations</a><a href="setup-privacy.html">Setup &amp; Privacy</a><a href="faq.html">FAQ</a><a href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download</a></nav></div></header>
+<main class="wrap">
+  <section class="hero"><div class="eyebrow">A practical tour</div><h1>Tools that support the session without taking it over.</h1><p class="lede">GenesisDM is a Windows desktop control panel for tabletop sessions. Its voice-driven suggestions are reviewable: a match is a suggestion, not an instruction to interrupt your game or change the scene without your say.</p></section>
+  <div class="grid">
+    <article class="card"><span class="badge">Local AI features</span><h2>Narrative &amp; scene matching</h2><ul><li>Optional microphone capture and local Whisper transcription.</li><li>Ollama-powered local LLM scene/entity extraction; Ollama is installed separately.</li><li>Searches tagged local art/music and shows confidence-scored suggestions for DM approval.</li><li>Manual text search/override remains available when you do not want voice suggestions.</li></ul></article>
+    <article class="card"><span class="badge">Session tools</span><h2>Combat, maps, clocks &amp; mechanics</h2><ul><li>Combat tracking and the tactical map workspace with tokens, measurements, cover, and fog-of-war tools.</li><li>Segmented clocks and a flexible mechanics/house-rules tracker.</li><li>Supported system presets currently include D&amp;D 5e (2024), Daggerheart, and Generic play.</li></ul></article>
+    <article class="card"><span class="badge">Between-session tools</span><h2>Campaign Crafter</h2><ul><li>Builds reviewable candidates for NPCs, locations, factions, creatures, and items.</li><li>Nothing becomes campaign canon automatically: confirm, edit, or discard each candidate.</li><li>Storyboard, scenes, threads, and run-sheet exports are useful but still early; expect rough edges.</li></ul></article>
+    <article class="card"><span class="badge">Optional</span><h2>Player Companion</h2><ul><li>Players on the same Wi-Fi can join in a browser using a code/QR and display name.</li><li>Remote players can use opt-in Cloudflare Tunnel (traffic routes through Cloudflare) or the self-hosted WireGuard alternative.</li><li>Remote networking is separate from local AI; it is not required for solo or same-network play.</li></ul></article>
+  </div>
+  <h2>Illustrations are identified honestly</h2>
+  <div class="card"><p>The homepage's session mockups are concept renders based on the current interface theme, not screenshots of the running app. The homepage labels the illustrative map and starter-pack art. Check the current release and in-app interface for what is actually shipped in a particular version.</p></div>
+  <p class="lede">See <a href="setup-privacy.html">Setup &amp; Privacy</a> for requirements and network behavior, <a href="integrations.html">Integrations</a> for Obsidian, or the <a href="faq.html">FAQ</a> for limitations.</p>
+</main>
+<footer><div class="wrap">Feature availability can change between trial releases. Verify the linked release notes for the build you install.</div></footer>
+</body>
+</html>
