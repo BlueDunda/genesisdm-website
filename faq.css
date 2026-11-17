@@ -1,0 +1,43 @@
+/* GenesisDM FAQ - page-specific components only.
+   Base tokens, typography, header, nav, buttons and footer live in styles.css. */
+
+.honesty-note {
+  background: var(--ink-900); border: 1px solid var(--brass); border-radius: var(--radius);
+  padding: 1.1rem 1.4rem; margin: 1.5rem 0 3rem; font-size: 0.92rem; color: var(--text);
+}
+.honesty-note strong { color: var(--brass-strong); }
+
+.faq-section { margin-bottom: 2.5rem; }
+.faq-section h2 {
+  font-size: 1.15rem; color: var(--verdigris-strong);
+  border-bottom: 1px solid var(--line); padding-bottom: 0.5rem; margin-bottom: 1rem;
+}
+
+details {
+  background: var(--ink-900); border: 1px solid var(--line); border-radius: 10px;
+  padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+}
+details[open] { border-color: var(--verdigris); }
+summary {
+  cursor: pointer; font-weight: 600; font-size: 0.98rem; color: var(--text);
+  list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--brass-strong); font-size: 1.2rem; flex: none; }
+details[open] summary::after { content: "\2013"; }
+summary:focus-visible { outline: 2px solid var(--verdigris-strong); outline-offset: 4px; border-radius: 4px; }
+
+.answer { margin-top: 0.7rem; color: var(--text-muted); font-size: 0.92rem; }
+.answer ul { padding-left: 1.2rem; }
+.answer li { margin-bottom: 0.4rem; }
+.answer a { color: var(--verdigris-strong); }
+
+table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.88rem; }
+table th, table td { text-align: left; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--line); }
+table th { color: var(--text-muted); font-weight: 600; }
+.spec-wrap { overflow-x: auto; }
+
+.badge-inline {
+  display: inline-block; background: var(--ink-800); border: 1px solid var(--line);
+  border-radius: 6px; padding: 0.1rem 0.5rem; font-size: 0.78rem; color: var(--text-muted);
+}
