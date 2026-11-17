@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obsidian &amp; Integrations | GenesisDM</title>
+<meta name="description" content="See how GenesisDM connects to a local Obsidian vault, what it can read and write, what it never overwrites, and which note integrations are only planned.">
+<style>
+:root{--bg:#14181f;--panel:#1a1f27;--line:#3a4450;--text:#dfe6e2;--muted:#aebbb6;--green:#6fbba5;--gold:#e0b862;--radius:14px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 "Segoe UI",system-ui,sans-serif}a{color:var(--green)}.wrap{max-width:960px;margin:auto;padding:0 1.4rem}header{position:sticky;top:0;background:#14181ff2;border-bottom:1px solid var(--line);backdrop-filter:blur(6px);z-index:2}.nav{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}.brand{color:var(--text);font-weight:700;text-decoration:none;font-family:Georgia,serif;font-size:1.2rem}.links{display:flex;gap:1rem;flex-wrap:wrap}.links a{color:var(--text);text-decoration:none}.hero{padding:3.5rem 0 2rem}.eyebrow{color:var(--gold);letter-spacing:.15em;text-transform:uppercase;font-size:.78rem;font-weight:700}h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.2}h1{font-size:clamp(2rem,5vw,3.3rem);margin:.5rem 0}h2{margin-top:2.5rem}h3{color:var(--green)}.lede{color:var(--muted);font-size:1.08rem;max-width:72ch}.notice,.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.4rem;margin:1rem 0}.notice{border-color:var(--gold)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}.card h3{margin-top:.2rem}.badge{display:inline-block;padding:.15rem .55rem;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.85rem}footer{border-top:1px solid var(--line);margin-top:3rem;padding:2rem 0;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><a class="brand" href="index.html">GenesisDM</a><nav class="links" aria-label="Main navigation"><a href="index.html">Home</a><a href="integrations.html" aria-current="page">Integrations</a><a href="setup-privacy.html">Setup &amp; Privacy</a><a href="faq.html">FAQ</a><a href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download</a></nav></div></header>
+<main class="wrap">
+  <section class="hero"><div class="eyebrow">Your notes, your vault</div><h1>Bring your campaign notes into the session.</h1><p class="lede">GenesisDM's implemented note-taking integration is Obsidian. Connect a vault folder to browse/search notes, follow wikilinks, and add session logs without switching away from the DM screen. GenesisDM does not provide vault synchronization; any sync from another service is a separate user choice.</p></section>
+  <div class="notice"><strong>Obsidian is optional.</strong> GenesisDM works without a vault. The vault path is selected by you, stored in your local app profile, and is not preconfigured in the trial build. No Obsidian plugin, cloud account, or running Obsidian process is required for vault access.</div>
+
+  <h2>What works with Obsidian today</h2>
+  <div class="grid">
+    <article class="card"><h3>Browse your campaign vault</h3><p>Search and browse Markdown notes, filter by campaign, follow <code>[[wikilinks]]</code>, open a note in Obsidian, or copy its wikilink. Browsing is read-only; editing your existing notes remains in Obsidian.</p></article>
+    <article class="card"><h3>Keep a session log</h3><p>Add manual session-log entries from GenesisDM. Logs are written under the GenesisDM-owned folder in your vault; entries are not automatically generated from your voice.</p></article>
+    <article class="card"><h3>Export GenesisDM-created material</h3><p>Configured Obsidian destinations can receive Campaign Crafter exports, session recaps, and compiled character-sheet notes. Some generated notes are refreshed when their source changes; review the note's generated-content notice before editing inside those generated sections.</p></article>
+  </div>
+
+  <h2>Read/write boundary</h2>
+  <div class="card"><ul><li>GenesisDM can read Markdown notes in the vault you selected so it can search and display them.</li><li>Writes are constrained to the configured app-owned folder, normally <code>GenesisDM/</code>; the vault write guard rejects paths that escape that folder.</li><li>The integration does not sync your vault to a GenesisDM server. If you separately sync the vault using another product, that product's own privacy and sync behavior applies.</li><li>Review generated-note behavior: session logs append; Campaign Crafter exports preserve content below their marker; compiled character sheets are app-generated and can be replaced when the sheet changes.</li></ul></div>
+
+  <h2>Integration status, without the roadmap blur</h2>
+  <div class="grid">
+    <article class="card"><span class="badge">Available now</span><h3>Obsidian</h3><p>Local vault browsing/search, wikilinks, manual session logs, and configured note exports. Connect or manage the vault in the app's Settings &gt; Integrations.</p></article>
+    <article class="card"><span class="badge">Planned, not available</span><h3>Notion</h3><p>Notion support is on the roadmap but there is no Notion connection or sync in this build.</p></article>
+    <article class="card"><span class="badge">Not currently connectable</span><h3>Other note services</h3><p>Google Docs and OneNote may appear as examples of a future export-destination design. They do not have working connection adapters in the current build.</p></article>
+  </div>
+  <p class="lede">For Ollama, model downloads, and a candid account of which features use the network, see <a href="setup-privacy.html">Setup &amp; Privacy</a>. For current requirements and limitations, see the <a href="faq.html">FAQ</a>.</p>
+</main>
+<footer><div class="wrap">GenesisDM: Fantasy Assistant &mdash; local-first DM tools with explicit integration boundaries.</div></footer>
+</body>
+</html>

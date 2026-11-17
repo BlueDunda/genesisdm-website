@@ -96,6 +96,13 @@
       </svg>
       <span class="brand-text"><span class="name">GenesisDM</span><span class="tagline">Fantasy Assistant</span></span>
     </a>
+    <nav class="links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="integrations.html">Integrations</a>
+      <a href="setup-privacy.html">Setup &amp; Privacy</a>
+      <a href="faq.html" aria-current="page">FAQ</a>
+    </nav>
     <a class="btn btn-primary" href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download Trial</a>
   </div>
 </header>
@@ -104,11 +111,11 @@
   <div class="hero">
     <div class="eyebrow">Read Before You Install</div>
     <h1>Frequently Asked Questions</h1>
-    <p class="lede"><strong>GenesisDM: Fantasy Assistant</strong> — an official DM assistant for all experiences — is an early Wave 1 trial build. Here's exactly what to expect — no exaggeration, no marketing gloss.</p>
+    <p class="lede"><strong>GenesisDM: Fantasy Assistant</strong> is an early Windows trial for local-first tabletop play. Here is what is implemented, what setup requires, what uses the network, and what is still planned.</p>
   </div>
 
   <div class="honesty-note">
-    <strong>The short version:</strong> this is a real, working local-first AI DM tool with genuine session-changing features — and it's still an early trial. Some things (custom asset uploads, full multi-phone voice, Campaign Crafter's final shape) are still being built. Read on for specifics.
+    <strong>The short version:</strong> this is a working early trial, not a finished commercial product. Local speech/LLM features require setup; Ollama must be installed separately for local AI. Obsidian vault browsing is available today. Some capabilities remain experimental or planned; read the requirements and privacy boundaries below before installing.
   </div>
 
   <div class="faq-section">
@@ -121,7 +128,7 @@
           <table>
             <tr><th>OS</th><td>Windows 10 or 11 only — this build is Windows-only for now</td></tr>
             <tr><th>RAM</th><td>8 GB minimum, 16 GB recommended (the local LLM and speech models both need headroom)</td></tr>
-            <tr><th>Disk space</th><td>~6 GB free (the app itself is ~1.5–3 GB, plus first-run model downloads)</td></tr>
+            <tr><th>Disk space</th><td>Allow about 6 GB free for the app and first-run model downloads; actual use varies by version and models.</td></tr>
             <tr><th>GPU</th><td>Not required — everything runs on CPU by default</td></tr>
             <tr><th>Microphone</th><td>Optional — only needed for live voice transcription; text-only play works fine without one</td></tr>
           </table>
@@ -130,16 +137,30 @@
     </details>
 
     <details>
+      <summary>Is Ollama required? Does GenesisDM install it?</summary>
+      <div class="answer">
+        <p><strong>Ollama is required for GenesisDM's local LLM features</strong>, including AI scene/entity extraction. Ollama is a separate local LLM runtime that you install yourself from <a href="https://ollama.com/download"><strong>https://ollama.com/download</strong></a>. GenesisDM checks whether Ollama is installed and responding, then downloads its configured model if needed; it does not install or update Ollama for you. If you install Ollama while GenesisDM is open, return to the setup step and click <strong>Retry</strong>. If it is installed but not responding, start Ollama and click Retry. You can skip setup, but LLM-dependent features will not be ready until Ollama and its model are available.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What happens during first-run setup, and how long does it take?</summary>
+      <div class="answer">
+        <p>After you install Ollama, GenesisDM downloads the configured LLM model, a local speech-to-text model (Whisper), and embedding models for asset search and optional speaker recognition. Budget <strong>10&ndash;20 minutes</strong> on a typical connection; slow connections or large model downloads can take longer. The steps can be skipped and revisited by reopening setup. A microphone is optional. Setup downloads require internet. After setup, local inference can run without a cloud AI API, but optional update checks, feedback, and remote-player networking still use the network.</p>
+      </div>
+    </details>
+
+    <details>
       <summary>Do I need an internet connection?</summary>
       <div class="answer">
-        <p>Only for first launch. A guided setup wizard downloads a local LLM model (via Ollama), a local speech-to-text model (Whisper), and two small embedding models — typically 10–20 minutes depending on your connection. Every step is skippable and resumable if something stalls. After that first setup finishes, <strong>GenesisDM runs entirely offline.</strong></p>
+        <p>Yes, for initial model downloads. Local speech transcription and LLM inference do not need a cloud speech or LLM API after setup. GenesisDM checks for updates over the network by default (turn this off or check manually in Settings &rarr; General &rarr; Updates). Sending feedback opens a Google Form only when you choose to submit it. Remote-player networking connects only when you opt in to a remote-play method.</p>
       </div>
     </details>
 
     <details>
       <summary>Is this free? Are there any API costs?</summary>
       <div class="answer">
-        <p>Free, with no ongoing costs. Speech transcription and scene/entity extraction both run on a local LLM (via Ollama) and local Whisper transcription on your own machine — there's no cloud API being billed, no subscription, no hidden usage costs.</p>
+        <p>The current trial has no subscription or per-request cloud AI API charges. Speech transcription and LLM inference run locally using Whisper and Ollama; Ollama is installed separately. First-run downloads, automatic update checks, user-initiated feedback, and optional remote play can use the network. See the privacy answer for details.</p>
       </div>
     </details>
 
@@ -155,16 +176,16 @@
     <h2>Privacy &amp; Multiplayer</h2>
 
     <details>
-      <summary>Does my voice or data ever leave my computer?</summary>
+      <summary>Does my voice or creative data leave my computer?</summary>
       <div class="answer">
-        <p>No. Voice transcription (Whisper) and scene/entity extraction (a local LLM via Ollama) both run entirely on your own machine — nothing is sent to a cloud speech or LLM API. The only network-facing piece is the optional Room Service that lets players join from their phones, and that's bound to your own local network by default. Reaching it from outside your network requires a WireGuard tunnel you set up and control yourself.</p>
+        <p><strong>Voice transcription and LLM inference are local by default:</strong> narration is not sent to a cloud speech or LLM API when the configured Ollama host is on this computer. “Local AI” does not mean every feature is offline. Initial setup downloads models; automatic update checks contact GitHub by default (disable in Settings &rarr; General &rarr; Updates); and Send Feedback opens a Google Form in your browser only when you choose it. The optional diagnostic summary is copied for you to review and submit, not uploaded automatically. Same-Wi-Fi player sessions stay on your local network. If you opt in to Cloudflare Tunnel for remote players, that player traffic routes through Cloudflare; WireGuard is the self-hosted alternative. An Obsidian vault is selected locally; GenesisDM reads notes and writes only inside its app-owned folder. If you configure a remote Ollama host, prompts sent to that host leave this computer and are handled under that server's privacy terms.</p>
       </div>
     </details>
 
     <details>
       <summary>What does a player need to join as a Player Companion?</summary>
       <div class="answer">
-        <p>Just a phone with a browser on the same wifi as your PC, plus your room code (or a quick scan of your in-app QR code) and a typed display name — no account, no install. Players joining from outside your home network need a WireGuard connection profile you send them first; that remote path is newer and less tested than the local, same-wifi flow.</p>
+        <p>On the same Wi-Fi, players need only a browser, your room code or QR code, and a display name — no account or app install. For players outside your network, the recommended route is the DM's opt-in Cloudflare Tunnel. Remote player traffic routes through Cloudflare; the live link is a secret, not an account login, and anyone with the link can reach the room until it closes (the room code is still required to join). WireGuard is available as a self-hosted alternative if you do not want player traffic routed through Cloudflare. Both remote routes require the DM to opt in.</p>
       </div>
     </details>
   </div>
@@ -180,11 +201,12 @@
     </details>
 
     <details>
-      <summary>What's not working yet, or has known limitations?</summary>
+      <summary>What is supported today, planned, or still limited?</summary>
       <div class="answer">
         <ul>
-          <li><strong>Custom asset uploads</strong> (your own art or music) aren't supported in this build yet — the tagging tool isn't packaged in. GenesisDM ships with a small starter pack so scene/music matching works immediately without one.</li>
-          <li><strong>Notion note-sync</strong> is planned but not built. Obsidian vault connection is supported today via the in-app Settings dialog.</li>
+          <li><strong>Custom asset libraries are supported:</strong> use Settings &rarr; Data &amp; Storage to choose an assets folder; add your own images, music, and maps; tag assets; and rebuild the local search index. The trial ships a small redistributable scene/music starter pack, not creators' paid or personal-use libraries.</li>
+          <li><strong>Obsidian is supported today:</strong> connect a local vault to browse/search notes, follow wikilinks, and add manual session logs. Session recaps, character sheets, and Campaign Crafter exports can be written inside the app-owned vault folder. Notion is planned but not built; other note-service destinations are not currently available.</li>
+          <li><strong>Ollama is a separate prerequisite</strong> for local LLM features. Install it yourself; GenesisDM checks for it and downloads its model, but does not install or start the runtime.</li>
           <li><strong>Full multi-phone voice</strong> (each player's own phone mic captured with pinpoint speaker attribution) is still waiting on one remaining manual step — a TLS certificate for secure browser microphone access. It works today on a single machine; broader multi-device testing is still in progress.</li>
           <li><strong>Windows SmartScreen</strong> will likely show "Windows protected your PC" on first run, since this build isn't code-signed yet. This is expected — click "More info" → "Run anyway."</li>
         </ul>
@@ -194,7 +216,7 @@
     <details>
       <summary>What tabletop systems does it support?</summary>
       <div class="answer">
-        <p>D&amp;D 5e (2024), Daggerheart, and a system-agnostic "Generic" mode — one dropdown switches Combat, Map, and Mechanics tracking to match whichever you're running.</p>
+        <p>The current build includes D&amp;D 5e (2024), Daggerheart, and a system-agnostic Generic mode. Other systems may work with Generic tools but have not necessarily received dedicated rules support.</p>
       </div>
     </details>
   </div>
@@ -212,9 +234,11 @@
 </div>
 
 <footer>
-  <a href="index.html">← Back to GenesisDM</a> &nbsp;·&nbsp;
+  <a href="index.html">Back to GenesisDM</a> &nbsp;|&nbsp;
+  <a href="features.html">Features</a> &nbsp;|&nbsp;
+  <a href="integrations.html">Integrations</a> &nbsp;|&nbsp;
+  <a href="setup-privacy.html">Setup &amp; Privacy</a> &nbsp;|&nbsp;
   <a href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download the Trial</a>
-  <a href="whatsnew.html">What's New</a> &nbsp;·&nbsp;
 </footer>
 
 </body>

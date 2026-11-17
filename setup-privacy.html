@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setup &amp; Privacy | GenesisDM</title>
+<meta name="description" content="Honest GenesisDM Windows setup requirements, Ollama installation, local AI behavior, network connections, and creative-data privacy boundaries.">
+<style>
+:root{--bg:#14181f;--panel:#1a1f27;--line:#3a4450;--text:#dfe6e2;--muted:#aebbb6;--green:#6fbba5;--gold:#e0b862;--radius:14px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 "Segoe UI",system-ui,sans-serif}a{color:var(--green)}.wrap{max-width:960px;margin:auto;padding:0 1.4rem}header{position:sticky;top:0;background:#14181ff2;border-bottom:1px solid var(--line);backdrop-filter:blur(6px);z-index:2}.nav{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}.brand{color:var(--text);font-weight:700;text-decoration:none;font-family:Georgia,serif;font-size:1.2rem}.links{display:flex;gap:1rem;flex-wrap:wrap}.links a{color:var(--text);text-decoration:none}.hero{padding:3.5rem 0 2rem}.eyebrow{color:var(--gold);letter-spacing:.15em;text-transform:uppercase;font-size:.78rem;font-weight:700}h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.2}h1{font-size:clamp(2rem,5vw,3.3rem);margin:.5rem 0}h2{margin-top:2.5rem}h3{color:var(--green)}.lede{color:var(--muted);font-size:1.08rem;max-width:72ch}.notice,.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.4rem;margin:1rem 0}.notice{border-color:var(--gold)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}.card h2,.card h3{margin-top:.2rem}.card ul{padding-left:1.25rem}.card li{margin:.55rem 0}.badge{display:inline-block;padding:.15rem .55rem;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.85rem}footer{border-top:1px solid var(--line);margin-top:3rem;padding:2rem 0;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><a class="brand" href="index.html">GenesisDM</a><nav class="links" aria-label="Main navigation"><a href="index.html">Home</a><a href="integrations.html">Integrations</a><a href="setup-privacy.html" aria-current="page">Setup &amp; Privacy</a><a href="faq.html">FAQ</a><a href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download</a></nav></div></header>
+<main class="wrap">
+  <section class="hero"><div class="eyebrow">Read before installing</div><h1>Setup &amp; privacy, plainly stated.</h1><p class="lede">GenesisDM is a Windows desktop app with local AI features. The local-first design matters for creative work, but it does not mean every feature is offline or that no external service is ever contacted. Here are the prerequisites and boundaries.</p></section>
+  <div class="notice"><strong>Ollama is a separate prerequisite for local LLM features.</strong> Install it yourself from <a href="https://ollama.com/download"><strong>https://ollama.com/download</strong></a>. GenesisDM checks that it is installed/responding and can download the configured model; it does not install or update Ollama. If it was installed while GenesisDM was open, click Retry in setup.</div>
+
+  <h2>What you need</h2>
+  <div class="grid">
+    <article class="card"><h3>Windows PC</h3><ul><li>Windows 10 or 11, 64-bit.</li><li>8 GB RAM minimum; 16 GB recommended.</li><li>Allow about 6 GB free for the application and first-run model downloads; actual storage use varies.</li><li>A GPU is not required. A microphone is optional unless you want live voice transcription.</li></ul></article>
+    <article class="card"><h3>First-run downloads</h3><ul><li>Install and start Ollama; GenesisDM then pulls its configured local LLM model.</li><li>The setup wizard downloads the Whisper speech model and embedding models for asset search and optional speaker recognition.</li><li>Plan for 10&ndash;20 minutes on a typical connection. Slow connections or model downloads can take longer.</li><li>Steps can be skipped. AI features that depend on a skipped runtime/model may not work until setup is completed.</li></ul></article>
+  </div>
+
+  <h2>What stays local, and what can use the network</h2>
+  <div class="grid">
+    <article class="card"><h3>Local AI by default</h3><p>Speech transcription uses the local Whisper model. LLM inference uses the configured Ollama host; the default host is the local computer. With that default, narration is not sent to a cloud speech or LLM API. If you deliberately configure a remote Ollama host, prompts sent to that server leave this PC and are subject to that server's privacy and access controls.</p></article>
+    <article class="card"><h3>Setup &amp; updates</h3><p>Initial setup downloads models over the internet. Automatic release checks are enabled by default and contact GitHub; you can disable them or check manually in <strong>Settings &gt; General &gt; Updates</strong>. Update checks do not upload your campaign notes or narration.</p></article>
+    <article class="card"><h3>Feedback is your choice</h3><p>Sending feedback opens a Google Form in your browser. GenesisDM does not submit a report automatically. The optional diagnostic summary is copied to your clipboard for you to inspect and decide whether to paste into the form.</p></article>
+    <article class="card"><h3>Player networking is opt-in</h3><p>Same-Wi-Fi sessions connect on your local network. If you enable Cloudflare Tunnel for remote players, player traffic routes through Cloudflare; the temporary join link is a secret, not an account login. WireGuard is the self-hosted alternative. Remote play is not required for local use.</p></article>
+    <article class="card"><h3>Obsidian stays a local-folder integration</h3><p>You choose a vault folder on the computer. GenesisDM reads notes locally and restricts its writes to the app-owned folder inside that vault. Connecting a vault does not sync it to GenesisDM or a GenesisDM server. See <a href="integrations.html">Integrations</a> for exactly what works.</p></article>
+    <article class="card"><h3>Your media has its own license</h3><p>The trial includes a small redistributable starter pack. Your custom assets stay in your selected local library. Paid or personal-use artwork/music must be used and transferred according to its creator's license; do not add it to public releases or shared repositories.</p></article>
+  </div>
+
+  <h2>Setup recovery</h2>
+  <div class="card"><ol><li>Install Ollama from <a href="https://ollama.com/download">ollama.com/download</a>.</li><li>Keep GenesisDM open, return to its Ollama setup step, and press <strong>Retry</strong>. The check accepts a responding configured server even if Windows has not refreshed this process's PATH.</li><li>If Ollama is installed but does not respond, start Ollama from Windows and press Retry again.</li><li>If you skip setup, reopen/replay setup later. For a full list of requirements and current limitations, read the <a href="faq.html">FAQ</a>.</li></ol></div>
+</main>
+<footer><div class="wrap">GenesisDM: Fantasy Assistant &mdash; Windows trial. Requirements and network behavior can change between releases; check the current release notes before updating.</div></footer>
+</body>
+</html>

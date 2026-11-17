@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GenesisDM: Fantasy Assistant — The Future of DM Screens</title>
-<meta name="description" content="GenesisDM: Fantasy Assistant is an official DM assistant for all experiences. It listens as you narrate and brings up matching scenes and music live, entirely on your own machine.">
+<meta name="description" content="GenesisDM is a local-first Windows DM assistant for voice-driven scenes, campaign tools, and Obsidian notes. Ollama must be installed separately for local AI features; setup and privacy details are disclosed up front.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%231a1f27'/%3E%3Cpath d='M25.5 9.5c3.6 0 6.5 2.9 6.5 6.5 0 3-2 5.5-4.7 6.3.6-1 1-2.2 1-3.5 0-3.6-2.9-6.5-6.5-6.5-.7 0-1.4.1-2 .3 1.2-1.9 3.3-3.1 5.7-3.1z' fill='%23e0b862'/%3E%3Ccircle cx='21' cy='21' r='1.3' fill='%236fbba5'/%3E%3Ccircle cx='18.4' cy='24.6' r='1.05' fill='%236fbba5'/%3E%3Ccircle cx='16.6' cy='28.6' r='0.85' fill='%236fbba5'/%3E%3Cpath d='M24 30.5v9.3c-2.7-2-6.8-2.7-10-2.3V28c3.2-.5 7.3.2 10 2.5z' fill='%23f4f1ea' stroke='%23c99a3e' stroke-width='0.9' stroke-linejoin='round'/%3E%3Cpath d='M24 30.5v9.3c2.7-2 6.8-2.7 10-2.3V28c-3.2-.5-7.3.2-10 2.5z' fill='%23f4f1ea' stroke='%23c99a3e' stroke-width='0.9' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
   :root {
@@ -228,7 +228,9 @@
       <a href="#features">DM Screen</a>
       <a href="#crafter">Campaign Crafter</a>
       <a href="#invite">Invite</a>
-      <a href="whatsnew.html">What's New</a>
+      <a href="features.html">Features</a>
+      <a href="integrations.html">Obsidian</a>
+      <a href="setup-privacy.html">Setup &amp; Privacy</a>
       <a href="faq.html">FAQ</a>
     </nav>
     <a class="btn btn-primary btn-sm" href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download Trial</a>
@@ -239,17 +241,18 @@
 <section class="hero wrap">
   <div class="eyebrow">GenesisDM: Fantasy Assistant · Wave 1 Tester Preview</div>
   <h1>The Future of DM Screens Has a <span class="accent">Voice.</span></h1>
-  <p class="lede"><strong>GenesisDM: Fantasy Assistant</strong> is an official DM assistant for all experiences — the first DM screen that listens. Describe a scene out loud and it finds the art and music to match — live, at your table, running entirely on your own machine.</p>
+  <p class="lede"><strong>GenesisDM: Fantasy Assistant</strong> is a local-first Windows DM companion for D&amp;D 5e (2024), Daggerheart, and system-agnostic play. Narrate a scene and GenesisDM can use local speech recognition and an Ollama-powered LLM to suggest matching art and music.</p>
   <div class="hero-ctas">
     <a class="btn btn-primary" href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download the Trial Build</a>
     <a class="btn btn-ghost" href="#pitch">See How It Works</a>
   </div>
   <div class="badge-row">
     <span class="badge">Windows 10 / 11</span>
-    <span class="badge">v0.1.3</span>
+    <span class="badge">Current Windows trial</span>
     <span class="badge">30-Day Free Trial</span>
-    <span class="badge">Runs 100% Locally</span>
+    <span class="badge">Local AI; optional network features</span>
   </div>
+  <p class="lede" style="margin:1.4rem auto 0;text-align:center"><strong>Before you download:</strong> Ollama is required for local LLM features and must be installed separately. GenesisDM checks for it and downloads its model, but does not install Ollama. <a href="https://ollama.com/download"><strong>Install Ollama</strong></a> &bull; <a href="setup-privacy.html">Read setup and privacy details</a></p>
 </section>
 
 <section id="pitch" class="wrap">
@@ -435,7 +438,8 @@
         <li>Map: drag/pan/zoom, markup &amp; walls, Fog of War, Measure Distance, Check Cover, experimental Dynamic Lighting</li>
         <li>Clocks: Blades-in-the-Dark-style segmented trackers</li>
         <li>Mechanics: freeform house-rules tracker per system</li>
-        <li>Notes: search &amp; browse your connected Obsidian vault, with wikilinks and a manual session log, right inside the app</li>
+        <li>Notes: browse/search a connected local Obsidian vault, follow wikilinks, and add manual session logs; Obsidian is optional</li>
+        <li>Obsidian is the supported note destination today; Notion is planned, not available in this build</li>
         <li>One System dropdown (D&amp;D 5e 2024 / Daggerheart / Generic) drives Combat, Map &amp; Mechanics together</li>
         <li>Global Undo, colorblind-safe palette, adjustable text size</li>
       </ul>
@@ -480,14 +484,40 @@
 </section>
 
 <section class="wrap">
+  <div class="feature-groups">
+    <div class="feature-group">
+      <h3>First-run requirements</h3>
+      <ul>
+        <li>Windows 10 or 11; 8 GB RAM minimum, 16 GB recommended; allow about 6 GB free disk space.</li>
+        <li><a href="https://ollama.com/download"><strong>Install Ollama separately</strong></a> for local LLM features. GenesisDM checks for it and downloads its model; it does not install or start Ollama.</li>
+        <li>Internet is needed for first-run model downloads. Budget 10&ndash;20 minutes on a typical connection; slow connections can take longer.</li>
+        <li>Setup steps can be skipped, but AI-dependent features may not work until their local runtime/models are ready. A microphone is optional.</li>
+      </ul>
+    </div>
+    <div class="feature-group">
+      <h3>Your creative work &amp; network choices</h3>
+      <ul>
+        <li>Voice transcription and LLM inference run on this computer with the default local Ollama host; a user-configured remote Ollama host receives prompts sent to that server.</li>
+        <li>Automatic update checks contact GitHub by default; turn them off or check manually in Settings.</li>
+        <li>Feedback opens a Google Form only when you choose Send Feedback. The optional diagnostic summary is copied for you to review and submit.</li>
+        <li>Same-Wi-Fi play stays on your network. Opt-in Cloudflare remote play routes player traffic through Cloudflare; WireGuard is the self-hosted alternative.</li>
+        <li>Obsidian connects to a vault folder you choose. GenesisDM itself does not sync that vault; a separate vault-sync service you configure has its own privacy behavior. GenesisDM writes only inside its app-owned vault folder. Notion is planned, not currently supported.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="lede"><a href="setup-privacy.html">Full setup, privacy, and network details</a> &bull; <a href="integrations.html">Obsidian and note integrations</a></p>
+</section>
+
+<section class="wrap">
   <div class="download-band">
     <div class="eyebrow">Wave 1</div>
     <h2>Ready to run a session your table's never seen before?</h2>
-    <p class="lede">Free trial build for Windows. Ten minutes of setup, then it just runs.</p>
+    <p class="lede">Free trial build for Windows. Budget 10&ndash;20 minutes for first-run model downloads. Ollama is required for local LLM features and must be installed separately; GenesisDM does not install it.</p>
+    <p class="lede">Voice transcription and LLM inference run locally with the default local Ollama host. Setup downloads models; optional update checks, feedback, and remote-player networking use the network.</p>
     <a class="btn btn-primary" href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download the Trial Build</a>
     <div class="badge-row">
       <span class="badge">Windows 10 / 11</span>
-      <span class="badge">~683 MB download</span>
+      <span class="badge">Large Windows download</span>
       <span class="badge">30-day trial</span>
       <span class="badge"><a href="faq.html" style="color:inherit">Read the FAQ first →</a></span>
     </div>
@@ -521,7 +551,9 @@
   <div class="footer-row">
     <span>© GenesisDM: Fantasy Assistant — Wave 1 Tester Preview</span>
     <div class="footer-links">
-      <a href="whatsnew.html">What's New</a>
+      <a href="setup-privacy.html">Setup &amp; Privacy</a>
+      <a href="features.html">Features</a>
+      <a href="integrations.html">Integrations</a>
       <a href="faq.html">FAQ</a>
       <a href="https://github.com/BlueDunda/genesisdm-releases">GitHub Releases</a>
       <a href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download</a>
