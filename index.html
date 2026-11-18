@@ -6,206 +6,8 @@
 <title>GenesisDM: Fantasy Assistant — The Future of DM Screens</title>
 <meta name="description" content="GenesisDM is a local-first Windows DM assistant for voice-driven scenes, campaign tools, and Obsidian notes. Ollama must be installed separately for local AI features; setup and privacy details are disclosed up front.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%231a1f27'/%3E%3Cpath d='M25.5 9.5c3.6 0 6.5 2.9 6.5 6.5 0 3-2 5.5-4.7 6.3.6-1 1-2.2 1-3.5 0-3.6-2.9-6.5-6.5-6.5-.7 0-1.4.1-2 .3 1.2-1.9 3.3-3.1 5.7-3.1z' fill='%23e0b862'/%3E%3Ccircle cx='21' cy='21' r='1.3' fill='%236fbba5'/%3E%3Ccircle cx='18.4' cy='24.6' r='1.05' fill='%236fbba5'/%3E%3Ccircle cx='16.6' cy='28.6' r='0.85' fill='%236fbba5'/%3E%3Cpath d='M24 30.5v9.3c-2.7-2-6.8-2.7-10-2.3V28c3.2-.5 7.3.2 10 2.5z' fill='%23f4f1ea' stroke='%23c99a3e' stroke-width='0.9' stroke-linejoin='round'/%3E%3Cpath d='M24 30.5v9.3c2.7-2 6.8-2.7 10-2.3V28c-3.2-.5-7.3.2-10 2.5z' fill='%23f4f1ea' stroke='%23c99a3e' stroke-width='0.9' stroke-linejoin='round'/%3E%3C/svg%3E">
-<style>
-  :root {
-    --ink-950: #14181f;
-    --ink-900: #1a1f27;
-    --ink-800: #212832;
-    --ink-750: #262e3a;
-    --line: #3a4450;
-    --text: #dfe6e2;
-    --muted: #8b9a94;
-    --verdigris: #4f9686;
-    --verdigris-strong: #6fbba5;
-    --brass: #c99a3e;
-    --brass-strong: #e0b862;
-    --danger: #c0453f;
-    --radius: 14px;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--ink-950);
-    color: var(--text);
-    font-family: "Segoe UI", "Segoe UI Variable", system-ui, -apple-system, sans-serif;
-    line-height: 1.55;
-  }
-  img, svg { max-width: 100%; }
-  a { color: var(--verdigris-strong); }
-  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
-  h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; letter-spacing: 0.01em; margin: 0 0 0.5em; }
-  h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--text); }
-  h2 .accent { color: var(--brass-strong); }
-  .eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 0.75rem;
-    color: var(--brass-strong);
-    font-weight: 600;
-  }
-  .lede { color: var(--muted); font-size: 1.05rem; max-width: 62ch; }
-  section { padding: 4.5rem 0; border-top: 1px solid var(--line); }
-  section:first-of-type { border-top: none; }
-
-  /* Header */
-  header.site {
-    position: sticky; top: 0; z-index: 20;
-    background: rgba(20, 24, 31, 0.92);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid var(--line);
-  }
-  .nav-row {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 1rem; padding: 0.9rem 0; flex-wrap: wrap;
-  }
-  .brand { display: flex; align-items: center; gap: 0.6rem; font-family: Georgia, serif; color: var(--text); text-decoration: none; }
-  .brand svg { flex: none; }
-  .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
-  .brand-text .name { font-size: 1.2rem; font-weight: 700; }
-  .brand-text .tagline { font-family: "Segoe UI", system-ui, sans-serif; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brass-strong); font-weight: 600; }
-  nav.links { display: flex; gap: 1.4rem; flex-wrap: wrap; font-size: 0.92rem; }
-  nav.links a { color: var(--text); text-decoration: none; opacity: 0.85; }
-  nav.links a:hover { opacity: 1; color: var(--verdigris-strong); }
-  .btn {
-    display: inline-block; text-decoration: none; font-weight: 600;
-    padding: 0.75rem 1.5rem; border-radius: 999px; border: 1px solid transparent;
-    font-size: 0.95rem; transition: transform 0.15s ease, background 0.15s ease;
-  }
-  .btn-primary { background: var(--verdigris); color: #0d1512; }
-  .btn-primary:hover { background: var(--verdigris-strong); transform: translateY(-1px); }
-  .btn-ghost { border-color: var(--line); color: var(--text); }
-  .btn-ghost:hover { border-color: var(--verdigris-strong); color: var(--verdigris-strong); }
-  .btn-sm { padding: 0.5rem 1rem; font-size: 0.85rem; }
-
-  /* Hero */
-  .hero { padding: 5rem 0 4rem; text-align: center; }
-  .hero h1 {
-    font-size: clamp(2.1rem, 5.5vw, 3.6rem);
-    line-height: 1.12;
-    margin: 0.6em auto 0.4em;
-    max-width: 18ch;
-  }
-  .hero h1 .accent { color: var(--brass-strong); }
-  .hero .lede { margin: 0 auto 2rem; font-size: 1.15rem; }
-  .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-  .badge-row { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
-  .badge {
-    font-size: 0.78rem; letter-spacing: 0.04em; color: var(--muted);
-    border: 1px solid var(--line); border-radius: 999px; padding: 0.3rem 0.85rem;
-  }
-
-  /* Pitch */
-  .pitch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.75rem; margin-top: 2.5rem; }
-  .pitch-card { background: var(--ink-900); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; }
-  .pitch-card .num { color: var(--brass-strong); font-family: Georgia, serif; font-size: 1.6rem; margin-bottom: 0.4rem; }
-  .pitch-card h3 { font-size: 1.1rem; color: var(--verdigris-strong); }
-  .pitch-card p { color: var(--muted); font-size: 0.95rem; margin: 0; }
-
-  /* Mockups */
-  .mock-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2.5rem; }
-  .mock-card { background: var(--ink-900); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
-  .mock-frame { background: var(--ink-950); padding: 1rem; }
-  .mock-caption { padding: 0.9rem 1.1rem; font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--line); }
-  .mock-caption strong { color: var(--text); }
-  .mock-note { text-align: center; color: var(--muted); font-size: 0.82rem; margin-top: 1.5rem; }
-
-  /* fake UI bits */
-  .tabbar { display: flex; gap: 0.4rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
-  .tabchip { font-size: 0.72rem; padding: 0.3rem 0.6rem; border-radius: 6px; background: var(--ink-800); color: var(--muted); border: 1px solid var(--line); }
-  .tabchip.active { background: var(--verdigris); color: #0d1512; border-color: var(--verdigris); font-weight: 600; }
-  .panel { background: var(--ink-800); border: 1px solid var(--line); border-radius: 8px; padding: 0.8rem; margin-bottom: 0.6rem; }
-  .panel-title { text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.5rem; }
-  .transcript-line { font-size: 0.8rem; color: var(--text); opacity: 0.85; margin-bottom: 0.3rem; }
-  .match-banner { display: flex; align-items: center; gap: 0.6rem; background: var(--ink-750); border: 1px solid var(--verdigris); border-radius: 6px; padding: 0.6rem; font-size: 0.78rem; }
-  .conf-pill { background: var(--verdigris); color: #0d1512; font-weight: 700; border-radius: 999px; padding: 0.1rem 0.55rem; font-size: 0.7rem; }
-  .map-shot { position: relative; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); background: #000; line-height: 0; }
-  .map-shot img { display: block; width: 100%; height: auto; }
-  .map-fog { position: absolute; inset: 0; background: radial-gradient(ellipse at 32% 68%, transparent 30%, rgba(14,17,23,0.82) 68%); pointer-events: none; }
-  .map-token { position: absolute; width: 13px; height: 13px; border-radius: 50%; border: 2px solid #0d1512; box-shadow: 0 0 0 1px rgba(255,255,255,0.5); transform: translate(-50%, -50%); }
-  .map-token.brass { background: var(--brass); }
-  .map-token.danger { background: var(--danger); }
-  .phone { width: 210px; margin: 0 auto; background: #0d1117; border: 6px solid var(--ink-800); border-radius: 28px; padding: 0.7rem; }
-  .phone .screen { background: var(--ink-950); border-radius: 16px; padding: 0.7rem; }
-  .phone .scene-art {
-    height: 110px; border-radius: 10px; margin-bottom: 0.5rem;
-    background: linear-gradient(180deg, rgba(13,21,18,0) 45%, rgba(13,21,18,0.9) 100%), url('assets/img/scene-misty-forest-path.jpg') center/cover no-repeat;
-    display: flex; align-items: flex-end; padding: 0.45rem 0.55rem;
-    color: #fff; font-size: 0.7rem; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,0.85);
-  }
-  .phone .clockbar { display: flex; gap: 4px; margin-bottom: 0.5rem; }
-  .phone .clockbar div { flex: 1; height: 6px; border-radius: 3px; background: var(--ink-800); overflow: hidden; }
-  .phone .clockbar div span { display: block; height: 100%; background: var(--brass); }
-  .phone .now-playing { font-size: 0.68rem; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; }
-
-  /* Clocks */
-  .clock-row { display: flex; gap: 0.9rem; justify-content: space-around; flex-wrap: wrap; padding: 0.3rem 0 0.1rem; }
-  .clock-ring {
-    width: 64px; height: 64px; border-radius: 50%; position: relative;
-    background: conic-gradient(var(--brass) calc(var(--pct) * 1%), var(--ink-950) 0);
-  }
-  .clock-ring::before { content: ""; position: absolute; inset: 6px; border-radius: 50%; background: var(--ink-800); }
-  .clock-ring span { position: absolute; inset: 6px; z-index: 1; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.56rem; line-height: 1.15; color: var(--text); padding: 0 3px; }
-
-  /* Crafter */
-  .crafter-chip { background: var(--ink-950); border: 1px solid var(--line); border-radius: 8px; padding: 0.55rem 0.65rem; margin-bottom: 0.5rem; font-size: 0.8rem; color: var(--text); }
-  .crafter-tag { display: inline-block; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #0d1512; background: var(--verdigris-strong); border-radius: 4px; padding: 0.1rem 0.4rem; margin-right: 0.4rem; vertical-align: 1px; }
-  .crafter-tag.faction { background: var(--brass-strong); }
-  .crafter-actions { display: flex; gap: 0.5rem; }
-  .crafter-actions span { font-size: 0.72rem; padding: 0.3rem 0.7rem; background: var(--ink-800); }
-
-  /* Features */
-  .feature-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.75rem; margin-top: 2.5rem; }
-  .feature-group { background: var(--ink-900); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; }
-  .feature-group h3 { color: var(--verdigris-strong); font-size: 1.05rem; margin-bottom: 0.8rem; }
-  .feature-group ul { margin: 0; padding-left: 1.1rem; }
-  .feature-group li { font-size: 0.9rem; color: var(--text); margin-bottom: 0.55rem; }
-  .feature-group li::marker { color: var(--brass-strong); }
-
-  /* Crafter */
-  .crafter-section { background: linear-gradient(180deg, rgba(201,154,62,0.06), transparent 40%); }
-  .wip-badge {
-    display: inline-block; background: var(--brass); color: #241c08; font-weight: 700;
-    font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
-    border-radius: 6px; padding: 0.3rem 0.7rem; margin-bottom: 0.8rem;
-  }
-  .crafter-note { color: var(--muted); font-size: 0.92rem; margin-bottom: 1.5rem; max-width: 66ch; }
-  .crafter-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem 2rem; list-style: none; margin: 0; padding: 0; }
-  .crafter-list li { font-size: 0.92rem; padding-left: 1.4rem; position: relative; }
-  .crafter-list li::before { content: "✓"; position: absolute; left: 0; color: var(--verdigris-strong); font-weight: 700; }
-
-  /* Download band */
-  .download-band {
-    text-align: center; background: var(--ink-900); border: 1px solid var(--line);
-    border-radius: var(--radius); padding: 3rem 1.5rem;
-  }
-  .download-band h2 { margin-bottom: 0.6rem; }
-  .download-band .lede { margin: 0 auto 1.5rem; }
-
-  /* Invite */
-  .invite-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; margin-top: 2.5rem; }
-  @media (min-width: 760px) { .invite-grid { grid-template-columns: auto 1fr; } }
-  .qr-card { background: #f4f1ea; border-radius: var(--radius); padding: 1.2rem; width: fit-content; margin: 0 auto; }
-  .qr-card svg { display: block; width: 168px; height: 168px; }
-  .qr-caption { text-align: center; font-size: 0.75rem; color: #333; margin-top: 0.5rem; font-weight: 600; }
-  .invite-copy textarea {
-    width: 100%; min-height: 90px; background: var(--ink-900); border: 1px solid var(--line);
-    color: var(--text); border-radius: 10px; padding: 0.9rem; font-family: inherit; font-size: 0.88rem; resize: vertical;
-  }
-  .invite-actions { display: flex; gap: 0.8rem; margin-top: 0.8rem; flex-wrap: wrap; }
-  .copy-status { font-size: 0.85rem; color: var(--verdigris-strong); align-self: center; }
-
-  footer { border-top: 1px solid var(--line); padding: 2.5rem 0; }
-  .footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; color: var(--muted); font-size: 0.85rem; }
-  .footer-row a { color: var(--muted); text-decoration: none; }
-  .footer-row a:hover { color: var(--verdigris-strong); }
-  .footer-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    * { transition: none !important; }
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="index.css">
 </head>
 <body>
 
@@ -231,12 +33,14 @@
       <a href="features.html">Features</a>
       <a href="integrations.html">Obsidian</a>
       <a href="setup-privacy.html">Setup &amp; Privacy</a>
+      <a href="whatsnew.html">What's New</a>
       <a href="faq.html">FAQ</a>
     </nav>
     <a class="btn btn-primary btn-sm" href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download Trial</a>
   </div>
 </header>
 
+<main>
 <div id="top"></div>
 <section class="hero wrap">
   <div class="eyebrow">GenesisDM: Fantasy Assistant · Wave 1 Tester Preview</div>
@@ -547,6 +351,8 @@
   </div>
 </section>
 
+</main>
+
 <footer class="wrap">
   <div class="footer-row">
     <span>© GenesisDM: Fantasy Assistant — Wave 1 Tester Preview</span>
@@ -554,6 +360,7 @@
       <a href="setup-privacy.html">Setup &amp; Privacy</a>
       <a href="features.html">Features</a>
       <a href="integrations.html">Integrations</a>
+      <a href="whatsnew.html">What's New</a>
       <a href="faq.html">FAQ</a>
       <a href="https://github.com/BlueDunda/genesisdm-releases">GitHub Releases</a>
       <a href="https://github.com/BlueDunda/genesisdm-releases/releases/latest">Download</a>
